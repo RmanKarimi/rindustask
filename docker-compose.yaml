@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  web:
+    restart: always
+    depends_on:
+      - rindus_db
+  rindus_db:
+    image: postgres
+
+
