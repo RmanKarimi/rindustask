@@ -26,7 +26,7 @@ class UserDataModel(DataModel):
         null=False,
         blank=False,
         on_delete=models.CASCADE,
-        editable=False,
+        editable=True,
         verbose_name='User'
     )
 

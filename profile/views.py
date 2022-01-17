@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class DataModelViewSet(ModelViewSet):
     serializer_class = DataModelDetailSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAdminAndOwner]
 
     def perform_create(self, serializer, *args, **kwargs):
         serializer.save(**kwargs)
@@ -16,7 +16,7 @@ class DataModelViewSet(ModelViewSet):
 
 class UserDataModelViewSet(DataModelViewSet):
     serializer_class = UserDataModelDetailSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAdminAndOwner]
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -29,7 +29,6 @@ class UserDataModelViewSet(DataModelViewSet):
 
     def perform_create(self, serializer, *args, **kwargs):
         user = self.request.user
-        print('----------------', user)
         kwargs['user'] = user
         super(UserDataModelViewSet, self).perform_create(serializer=serializer, **kwargs)
 
