@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class DataModelViewSet(ModelViewSet):
     serializer_class = DataModelDetailSerializer
-    permission_classes = [AllowAdminAndOwner]
+    permission_classes = [AllowAdminAndOwner, IsAuthenticated]
 
     def perform_create(self, serializer, *args, **kwargs):
         serializer.save(**kwargs)

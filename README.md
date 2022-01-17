@@ -8,6 +8,7 @@
 3. Restrict manipulation operations on a user to the administrator who created them
 4. Using PostgreSQL as the database backend
 5. API documentation using Swagger
+6. Using django-allauth
 
 
 # Development
@@ -41,3 +42,6 @@ This project is set up to run using [Docker Compose](https://docs.docker.com/com
    $ docker-compose exec web python3 manage.py createsuperuser
    ```
 
+1. Users can login through this URL:
+   
+   ` http://localhost:8000/accounts/google/login/,`
