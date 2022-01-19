@@ -19,8 +19,6 @@ class AllowAdminAndOwner(permissions.BasePermission):
     message = _('You are neither admin or owner.')
 
     def has_object_permission(self, request, view, obj):
-        print('================================')
-        print('================================')
         if not (request.user and request.user.is_authenticated):
             return False
 
