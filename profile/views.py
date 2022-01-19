@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class DataModelViewSet(ModelViewSet):
     serializer_class = DataModelDetailSerializer
-    permission_classes = [AllowAdminAndOwner, IsAuthenticated]
+    permission_classes = [AllowAdminAndOwner]
 
     def perform_create(self, serializer, *args, **kwargs):
         serializer.save(**kwargs)
@@ -19,7 +19,7 @@ class UserDataModelViewSet(DataModelViewSet):
     permission_classes = [AllowAdminAndOwner]
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
+        queryset = self.get_queryset(request)
         serializer = self.get_serializer(queryset, many=True)
 
         response_data = {'success': True,
@@ -38,3 +38,8 @@ class UserViewSet(UserDataModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [AllowAdminAndOwner]
     http_method_names = ['get', 'put', 'post', 'delete']
+
+    def get_queryset(self, request):
+        qs = super().get_queryset()
+        user = request.user
+        return qs.filter(user=user.id)
